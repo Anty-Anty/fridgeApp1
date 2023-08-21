@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;800&family=Patua+One&display=swap" rel="stylesheet">
+
+    <title>Groceries</title>
+</head>
+
+<body>
+    <div class="container-nav">
+        <div class="nav">name</div>
+        <div class="nav title-text">fridgeApp</div>
+        <div class="nav"><span class="hidden">restock</span> date</div>
+        <form class="nav padding-top" method="GET" action="/new">
+            <button class="btn-add">add <span class="hidden">product</span></button>
+        </form>
+    </div>
+    <ul>
+        <%let preCategoyList=[];%>
+            <%for(let product of products){preCategoyList.push(product.category)};%>
+                <%let categoyList=preCategoyList.filter((value, index, array)=> array.indexOf(value) === index);%>
+                    <% for(let i=0; i<categoyList.length; i++){ %>
+
+       
+                        <div class="container-category">
+                            <div class=""></div>
+                            <div class="category"><%= categoyList[i]%></div>
+                            <div class=""></div>
+                            <div class=""></div>
+                        </div>
+
+                        <% for(let product of products){ %>
+                            <%if (categoyList[i]==product.category){%>
+                                <div class="container-body">
+
+                                    <div class="div-img-name">
+                                        <img class="img" src="images/<%=product.img%>" alt="">
+                                        <div class="name">
+                                            <%= product.name%>
+                                        </div>
+                                    </div>
+
+
+                                    <form class="form-btn-stock" method="POST" action="/<%=product._id%>?_method=PATCH">
+                                        <button name='button'
+                                            class='btn-stock-left <%= product.none%>'
+                                            value='none'>none</button>
+                                        <button name='button'
+                                            class='btn-stock-center <%= product.some%>'
+                                            value='some'>some</button>
+                                        <button name='button'
+                                            class='btn-stock-right <%= product.enough%>'
+                                            value='enough'>enough</button>
+                                    </form>
+
+                                    <span class="date">
+                                        <%= product.date%>
+                                    </span>
+
+                                    <form class="form-edit" method="GET" action="/<%=product._id%>/edit">
+                                        <button class='btn-edit'>edit</button>
+                                    </form>
+
+                                </div>
+                                <% }%>
+                                    <% }%>
+                                        <% }%>
+    </ul>
+
+
+</body>
+
+</html>

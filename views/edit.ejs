@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+
+<body>
+    <h1>Edit Product</h1>
+    <form action="/<%=product._id%>/edit?_method=PATCH" method="POST">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" placeholder="product name" value="<%=product.name%>">
+        <label for="date">Date</label>
+        <input type="text" id="date" name="date" placeholder="date" value="<%= product.date %>">
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" placeholder="category" value="<%= product.category %>">
+        <label for="img">Image name</label>
+        <input type="text" id="img" name="img" placeholder="img" value="<%= product.img %>">
+        <button>Submit</button>
+    </form>
+    <form action="/<%=product._id%>/delete?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+    <form action="/">
+        <button>Cancel</button>
+    </form>
+
+
+</body>
+
+</html>
